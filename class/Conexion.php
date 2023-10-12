@@ -1,4 +1,4 @@
-<?
+<?PHP
     class Conexion{
         
         //atributos o propiedades
@@ -7,7 +7,7 @@
         public const DB_USER = "root";
         public const DB_PASS = "";
         public const DB_NAME = "tiendita";
-        public const DB_DSN = "mysql:host=".DB_SERVER.";dbname=".DB_NAME.";charset=utf8mb4";
+        public const DB_DSN = "mysql:host=".self::DB_SERVER.";dbname=".self::DB_NAME.";charset=utf8mb4";
 
         protected PDO $db;
         //metodo contructor

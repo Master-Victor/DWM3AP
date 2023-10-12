@@ -22,7 +22,7 @@ $comics = (new Comic())->catalogo_completo();
                         <p class="card-text"><?= $comic->bajada_reducida(15) ?></p>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Guion: <?= $comic->getGuion() ?></li>
+                        <li class="list-group-item">Guion: <?= $comic->getGuionista() ?></li>
                         <li class="list-group-item">Arte: <?= $comic->getArte() ?></li>
                         <li class="list-group-item"><?= $comic->getPublicacion() ?></li>
                     </ul>

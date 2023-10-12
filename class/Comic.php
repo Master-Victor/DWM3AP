@@ -4,16 +4,18 @@ class Comic
 {
     //atributo
     protected $id;
-    protected $personaje;
-    protected $serie;
+    protected $personaje_principal_id;
+    protected $serie_id;
     protected $volumen;
     protected $numero;
     protected $titulo;
     protected $publicacion;
-    protected $guion;
-    protected $arte;
+    protected $guionista_id;
+    protected $artista_id;
     protected $bajada;
     protected $portada;
+    protected $origen;
+    protected $editorial;    
     protected $precio;
     //METODOS
 
@@ -22,16 +24,6 @@ class Comic
     public function getId()
     {
         return $this->id;
-    }
-
-    public function getPersonaje()
-    {
-        return $this->personaje;
-    }
-
-    public function getSerie()
-    {
-        return $this->serie;
     }
 
     public function getVolumen()
@@ -52,16 +44,6 @@ class Comic
     public function getPublicacion()
     {
         return $this->publicacion;
-    }
-
-    public function getGuion()
-    {
-        return $this->guion;
-    }
-
-    public function getArte()
-    {
-        return $this->arte;
     }
 
     public function getBajada()
@@ -86,16 +68,6 @@ class Comic
         $this->id = $id;
     }
 
-    public function setPersonaje(string $personaje): void
-    {
-        $this->personaje = $personaje;
-    }
-
-    public function setSerie(string $serie)
-    {
-        $this->serie = $serie;
-    }
-
     public function setVolumen(string $volumen)
     {
         $this->volumen = $volumen;
@@ -114,16 +86,6 @@ class Comic
     public function setPublicacion(string $publicacion)
     {
         $this->publicacion = $publicacion;
-    }
-
-    public function setGuion(string $guion)
-    {
-        $this->guion = $guion;
-    }
-
-    public function setArte(string $arte)
-    {
-        $this->arte = $arte;
     }
 
     public function setBajada(string $bajada)
@@ -145,31 +107,39 @@ class Comic
     public function catalogo_completo(): array
     {
         $catalogo = [];
+        $conexion = (new Conexion())->getConexion();
+        $query = "SELECT * FROM comics";
 
-        $miArchivoJson = file_get_contents('./includes/productos.json');
-        $JSON_DATA = json_decode($miArchivoJson);
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->execute();
 
-        foreach ($JSON_DATA as $value) {
-            //creo una instancia del comic -> ahora tengo un objeto comic
-            $comic = new self();
-            //relleno los atributos
-            $comic->id = $value->id;
-            $comic->personaje = $value->personaje;
-            $comic->serie = $value->serie;
-            $comic->volumen = $value->volumen;
-            $comic->numero = $value->numero;
-            $comic->titulo = $value->titulo;
-            $comic->publicacion = $value->publicacion;
-            $comic->guion = $value->guion;
-            $comic->arte = $value->arte;
-            $comic->bajada = $value->bajada;
-            $comic->portada = $value->portada;
-            $comic->precio = $value->precio;
-            //agrego a mi catalogo
-            //array_push($catalogo, $comic);
+        $catalogo = $PDOStatement->fetchAll();
+
+        // $miArchivoJson = file_get_contents('./includes/productos.json');
+        // $JSON_DATA = json_decode($miArchivoJson);
+
+        // foreach ($JSON_DATA as $value) {
+        //     //creo una instancia del comic -> ahora tengo un objeto comic
+        //     $comic = new self();
+        //     //relleno los atributos
+        //     $comic->id = $value->id;
+        //     $comic->personaje = $value->personaje;
+        //     $comic->serie = $value->serie;
+        //     $comic->volumen = $value->volumen;
+        //     $comic->numero = $value->numero;
+        //     $comic->titulo = $value->titulo;
+        //     $comic->publicacion = $value->publicacion;
+        //     $comic->guion = $value->guion;
+        //     $comic->arte = $value->arte;
+        //     $comic->bajada = $value->bajada;
+        //     $comic->portada = $value->portada;
+        //     $comic->precio = $value->precio;
+        //     //agrego a mi catalogo
+        //     //array_push($catalogo, $comic);
             
-            $catalogo []= $comic;
-        }
+        //     $catalogo []= $comic;
+        // }
 
         return $catalogo;
     }
@@ -206,7 +176,7 @@ class Comic
      */
     public function nombre_completo(): string
     {
-        return $this->serie . " Vol.". $this->volumen . " #".$this->numero;
+        return "";//$this->serie . " Vol.". $this->volumen . " #".$this->numero;
     }
     /**
      * Devuelve el precio de la unidad, formateado correctamente
@@ -236,5 +206,19 @@ class Comic
 
     return $resultado;
 
+    }
+
+    public function getGuionista()
+    {
+
+        $guionista = (new Guionista())->get_x_id($this->guionista_id);
+        $nombre = $guionista->getNombreCompleto();
+        return $nombre;
+    }
+
+    public function getArte(){
+        $artista = (new Artista())->get_x_id($this->artista_id);
+        $nombre = $artista->getNombreCompleto();
+        return $nombre; 
     }
 }

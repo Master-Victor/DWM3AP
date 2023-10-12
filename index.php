@@ -1,7 +1,12 @@
 <?php
 
 require_once "libraries/funciones.php";
+require_once "class/Conexion.php";
+require_once "class/Guionista.php";
+require_once "class/Artista.php";
 require_once "class/Comic.php";
+
+
 
 $seccion = isset($_GET["sec"]) ? $_GET["sec"] : "home"; //home envios quienes_somos
 
