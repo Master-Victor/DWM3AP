@@ -185,6 +185,9 @@ class Comic
      */
     public function precio_formateado(): string
     {
+        // if( $this->descuento !== null ){ en caso que quieran un descuento
+        //     return number_format($this->precio * $this->descueto, 2, ",", "."); 
+        // }
         return number_format($this->precio, 2, ",", ".");
     }
         /**
@@ -220,5 +223,47 @@ class Comic
         $artista = (new Artista())->get_x_id($this->artista_id);
         $nombre = $artista->getNombreCompleto();
         return $nombre; 
+    }
+
+    public function catalogo_x_artista(int $artista_id){
+        $catalogo = [];
+        $conexion = (new Conexion())->getConexion();
+        $query = "SELECT * FROM comics WHERE comics.artista_id = $artista_id";
+
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->execute();
+
+        $catalogo = $PDOStatement->fetchAll();
+
+        return $catalogo;
+    }
+
+    public function catalogo_x_guionista(int $guionista_id){
+        $catalogo = [];
+        $conexion = (new Conexion())->getConexion();
+        $query = "SELECT * FROM comics WHERE comics.guionista_id = $guionista_id";
+
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->execute();
+
+        $catalogo = $PDOStatement->fetchAll();
+
+        return $catalogo;
+    }
+
+    public function catalogo_x_rango(int $min, int $max){ 
+        $catalogo = [];
+        $conexion = (new Conexion())->getConexion();
+        $query = "SELECT * FROM comics WHERE comics.precio > $min AND comics.precio < $max";
+
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->execute();
+
+        $catalogo = $PDOStatement->fetchAll();
+
+        return $catalogo;
     }
 }

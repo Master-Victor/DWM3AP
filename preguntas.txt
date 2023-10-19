@@ -1,0 +1,8 @@
+*	- Poder traer todos los comics de un determinado artista
+*	- Poder traer todos los comics de un determinado guionista
+**	- Crear paginas para cada artista y para cada guionista
+**	- Crear Pagina para cada personaje(mostrar los detalles)
+**	- Destacar ,ciertos productos ( Promos y descuentos )
+*** - Poder traer comics x rango de precios
+****- Buscador poder buscar palabras en los titulos y bajadas SELECT * FROM comics WHERE titulo LIKE "%Suerte: %"
+****- Listar todos los personajes secuendarios de un comic JOIN
