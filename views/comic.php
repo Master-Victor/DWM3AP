@@ -27,7 +27,7 @@
                         </div>
 
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><span class="fw-bold">Guion:</span> <?= $comic->getGuion(); ?></li>
+                            <li class="list-group-item"><span class="fw-bold">Guion:</span> <?= $comic->getGuionista(); ?></li>
                             <li class="list-group-item"><span class="fw-bold">Arte:</span> <?= $comic->getArte(); ?></li>
                             <li class="list-group-item"><span class="fw-bold">Publicación:</span> <?= $comic->getPublicacion(); ?></li>
                         </ul>

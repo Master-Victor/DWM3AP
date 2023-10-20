@@ -144,18 +144,18 @@ class Comic
         return $catalogo;
     }
 
-    public function catalogo_x_personaje(string $personaje){
-        $catalogo = $this->catalogo_completo();
+    public function catalogo_x_personaje(int $id_personaje){
+        $catalogo = [];
+        $conexion = (new Conexion())->getConexion();
+        $query = "SELECT * FROM comics WHERE comics.personaje_principal_id = $id_personaje";
 
-        $resultado = [];
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->execute();
 
-        foreach( $catalogo as $comic ){
-            if( $comic->personaje == $personaje ){
-                $resultado []= $comic;
-            }
-        }
+        $catalogo = $PDOStatement->fetchAll();
 
-        return $resultado;
+        return $catalogo;
     }
 
     public function catalogo_x_id(int $id){
@@ -213,7 +213,6 @@ class Comic
 
     public function getGuionista()
     {
-
         $guionista = (new Guionista())->get_x_id($this->guionista_id);
         $nombre = $guionista->getNombreCompleto();
         return $nombre;
