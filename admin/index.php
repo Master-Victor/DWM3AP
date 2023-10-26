@@ -22,6 +22,12 @@ $seccionesValidas = [
     ],
     "add_personaje" =>[
         "titulo" => "Agregar Personaje"
+    ],
+    "edit_personaje" =>[
+        "titulo" => "Editar Personaje"
+    ],
+    "delete_personaje" => [
+        "titulo" => "Eliminar Personaje"
     ]
 ];
 

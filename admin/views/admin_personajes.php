@@ -27,7 +27,8 @@ $personajes = (new Personaje())->lista_completa();
                             <td><?= $p->getCreador() ?></td>
                             <td><?= $p->getBiografia() ?></td>
                             <td>
-                                <a href="index.php?sec=edit_personaje&id=<?= $p->getId() ?>" role="button" class="btn btn-sm btn-warning">Editar personaje</a>
+                                <a href="index.php?sec=edit_personaje&id=<?= $p->getId() ?>" role="button" class="btn btn-sm btn-warning">Editar</a>
+                                <a href="index.php?sec=delete_personaje&id=<?= $p->getId() ?>" role="button" class="btn btn-sm btn-warning">Eliminar</a>
                             </td>
                         </tr>
                     <?php } ?>

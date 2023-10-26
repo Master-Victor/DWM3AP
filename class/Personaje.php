@@ -56,6 +56,66 @@ class Personaje
     }
 
     /**
+     * Devuelve los datos de un personaje en particular
+     * @param int $id El ID único del personaje 
+     */
+    public function get_x_id(int $id): ?Personaje
+    {
+        $conexion = (new Conexion())->getConexion();
+        $query = "SELECT * FROM personajes WHERE id = :id";
+
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->execute([
+            'id' => $id
+        ]);
+
+        $resultado = $PDOStatement->fetch();
+
+        if(!$resultado){
+            return null;
+        }
+
+        return $resultado;
+
+    }   
+    /**
+     * Edita un personaje a la base de datos
+     * @param string $nombre
+     * @param string $alias
+     * @param string $creador Creador o creadores del personaje, separados por comas
+     * @param int $primera_aparicion El año en el que el personaje hizo su primera aparición (4 dígitos)
+     * @param string $biografia 
+     * @param string $imagen ruta a un archivo .jpg o .png 
+     * @param int $id El ID único del personaje
+     */ 
+    public function edit($nombre, $alias, $creador, $primera_aparicion, $biografia, $imagen, $id)
+    {
+        $conexion = (new Conexion())->getConexion();
+        $query = "UPDATE `personajes` SET `nombre` = ':nombre', `alias` = ':alias', `biografia` = ':biografia', `creador` = ':creador', `primera_aparicion` = ':primera_aparicion', `imagen` = ':imagen' WHERE `personajes`.`id` = :id";
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute([
+            'nombre' => $nombre,
+            'alias' => $alias,
+            'biografia' => $biografia,
+            'creador' => $creador,
+            'primera_aparicion' => $primera_aparicion,
+            'imagen' => $imagen,
+            'id' => $id,
+        ]);
+    }
+
+    public function delete($id)
+    {
+        $conexion = (new Conexion())->getConexion();
+        $query = "DELETE FROM `personajes` WHERE `personajes`.`id` = :id";
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute([
+            'id' => $id
+        ]);
+    }
+
+    /**
      * Get the value of nombre
      */
     public function getNombre()
