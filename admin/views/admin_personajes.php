@@ -1,7 +1,9 @@
 <?php
 
 $personajes = (new Personaje())->lista_completa();
-
+echo "<pre>";
+print_r($personajes);
+echo "</pre>";
 ?>
 <div class="row my-5">
     <div class="col">
@@ -10,7 +12,7 @@ $personajes = (new Personaje())->lista_completa();
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col" width="15%">imagen</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Alias</th>
                         <th scope="col">Creador</th>
@@ -21,9 +23,9 @@ $personajes = (new Personaje())->lista_completa();
                 <tbody>
                     <?php foreach ($personajes as $p) { ?>
                         <tr>
-                            <th scope="col"> <?= $p->getId() ?> </th>
+                            <td><img src="../img/personajes/<?= $p->getImagen() ?>" class="img-fluid rounded shadow-sm"></td>
                             <td><?= $p->getNombre() ?></td>
-                            <td><?= $p->getAlias () ?></td>
+                            <td><?= $p->getAlias() ?></td>
                             <td><?= $p->getCreador() ?></td>
                             <td><?= $p->getBiografia() ?></td>
                             <td>

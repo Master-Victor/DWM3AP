@@ -1,12 +1,5 @@
 <?php
-
-require_once "libraries/funciones.php";
-require_once "class/Conexion.php";
-require_once "class/Guionista.php";
-require_once "class/Artista.php";
-require_once "class/Comic.php";
-
-
+require_once "libraries/autoload.php";
 
 $seccion = isset($_GET["sec"]) ? $_GET["sec"] : "home"; //home envios quienes_somos
 
@@ -56,6 +49,7 @@ if( array_key_exists($seccion, $seccionesValidas) ){
     <title>La Tiendita de Comics: <?= $titulo ?></title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 
     <link href="css/styles.css" rel="stylesheet">
 </head>

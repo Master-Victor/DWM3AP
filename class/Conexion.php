@@ -14,7 +14,9 @@
         public function __construct()
         {
             try{
-                $this->db = new PDO(self::DB_DSN, self::DB_USER, self::DB_PASS, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+                $this->db = new PDO(self::DB_DSN, self::DB_USER, self::DB_PASS,array(
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+                  ));
             }catch(Exception $e){
                 die("ultimas palabras"); //exit
             }

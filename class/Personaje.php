@@ -92,17 +92,9 @@ class Personaje
     public function edit($nombre, $alias, $creador, $primera_aparicion, $biografia, $imagen, $id)
     {
         $conexion = (new Conexion())->getConexion();
-        $query = "UPDATE `personajes` SET `nombre` = ':nombre', `alias` = ':alias', `biografia` = ':biografia', `creador` = ':creador', `primera_aparicion` = ':primera_aparicion', `imagen` = ':imagen' WHERE `personajes`.`id` = :id";
+        $query = "UPDATE `personajes` SET `nombre` = '$nombre', `alias` = '$alias', `biografia` = '$biografia', `creador` = '$creador', `primera_aparicion` = '$primera_aparicion', `imagen` = '$imagen' WHERE `personajes`.`id` = $id";
         $PDOStatement = $conexion->prepare($query);
-        $PDOStatement->execute([
-            'nombre' => $nombre,
-            'alias' => $alias,
-            'biografia' => $biografia,
-            'creador' => $creador,
-            'primera_aparicion' => $primera_aparicion,
-            'imagen' => $imagen,
-            'id' => $id,
-        ]);
+        $PDOStatement->execute();
     }
 
     public function delete($id)

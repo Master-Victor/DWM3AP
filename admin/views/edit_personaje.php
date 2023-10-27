@@ -1,7 +1,7 @@
 <?php
 
 $id = $_GET["id"] ?? false;
-if(!$id){
+if (!$id) {
     header("Location: index.php?sec=admin_personajes");
 }
 $personaje = (new Personaje())->get_x_id($id);
@@ -23,9 +23,14 @@ $personaje = (new Personaje())->get_x_id($id);
                 <label for="alias" class="form-label">Alias</label>
                 <input value="<?= $personaje->getAlias() ?>" type="text" class="form-control" id="alias" name="alias" required>
             </div>
-            <div class="col-md-6 mb-3">
-                <label for="imagen" class="form-label">Reemplazar</label>
-                <input type="file" class="form-control" id="imagen" name="imagen">
+            <div class="col-md-2 mb-3">
+                <label for="imagen" class="form-label">Imágen actual</label>
+                <img src="../img/personajes/<?= $personaje->getImagen() ?>" alt="Imágen Illustrativa de <?= $personaje->getNombre() ?>" class="img-fluid rounded shadow-sm d-block">
+                <input class="form-control" type="hidden" id="imagen_og" name="imagen_og" value="<?= $personaje->getImagen() ?>">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="imagen" class="form-label">Reemplazar Imagen</label>
+                <input class="form-control" type="file" id="imagen" name="imagen">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="primera_aparicion" class="form-label">Primera Aparicion</label>
