@@ -103,6 +103,30 @@ class Comic
         $this->precio = $precio;
     }
 
+    public function getEditorial(){
+        return $this->editorial;
+    }
+
+    public function getOrigen(){
+        return $this->origen;
+    }
+
+    public function getArtistaId(){
+        return $this->artista_id;
+    }
+
+    public function getGuionistaId(){
+        return $this->guionista_id;
+    }
+
+    public function getSerieId(){
+        return $this->serie_id;
+    }
+
+    public function getPersonajePrincipalId(){
+        return $this->personaje_principal_id;
+    }
+
     //metodo
     public function catalogo_completo(): array
     {
@@ -176,7 +200,7 @@ class Comic
      */
     public function nombre_completo(): string
     {
-        return "";//$this->serie . " Vol.". $this->volumen . " #".$this->numero;
+        return $this->getTitulo()." "."Vol.". $this->volumen . " #".$this->numero;
     }
     /**
      * Devuelve el precio de la unidad, formateado correctamente
@@ -264,5 +288,16 @@ class Comic
         $catalogo = $PDOStatement->fetchAll();
 
         return $catalogo;
+    }
+
+    public function insert( $titulo, $personaje_principal_id, $serie_id, $guionista_id, $artista_id, $volumen, $numero, $publicacion, $origen, $editorial, $bajada, $portada, $precio ) : string
+    {
+        $conexion = (new Conexion())-> getConexion();
+        $query = "INSERT INTO `comics` (`id`, `titulo`, `personaje_principal_id`, `guionista_id`, `artista_id`, `serie_id`, `volumen`, `numero`, `publicacion`, `origen`, `editorial`, `bajada`, `portada`, `precio`) VALUES (NULL, '$titulo', '$personaje_principal_id', '$guionista_id', '$artista_id', '$serie_id', '$volumen', '$numero', '$publicacion', '$origen', '$editorial', '$bajada', '$portada', '$precio');";
+
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute();
+
+        return "Aca iria el id del comic que recien cree";
     }
 }

@@ -16,7 +16,7 @@ $comics = (new comic())->catalogo_completo();
                         <th scope="col" width="15%">Nombre</th>
                         <th scope="col">Titulo</th>
                         <th scope="col">Bajada</th>
-                        <th scope="col">Personajes Secundarios</th>
+                        <!-- <th scope="col">Personajes Secundarios</th> -->
                         <th scope="col">Guion</th>
                         <th scope="col">Arte</th>
                         <th scope="col">Precio</th>
@@ -30,8 +30,8 @@ $comics = (new comic())->catalogo_completo();
                             <td><?= $C->nombre_completo() ?></td>
                             <td><?= $C->getTitulo() ?></td>
                             <td><?= $C->getBajada() ?></td>
-                            <td><?= $C->getPersonajes_secundarios() ?></td>
-                            <td><?= $C->getGuion() ?></td>
+                            <!-- <td><?php /*$C->getPersonajes_secundarios()*/ ?></td> -->
+                            <td><?= $C->getGuionista() ?></td>
                             <td><?= $C->getArte() ?></td>
                             <td>$<?= $C->getPrecio() ?></td>
                             <td>
