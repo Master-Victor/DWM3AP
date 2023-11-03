@@ -16,7 +16,7 @@ if(!$id){
 try {
     if( $fileData ){
         if(!empty($postData['imagen_og'])){
-            //unlink("../../img/personajes/$postData['imagen_og']");
+            Imagen::borrarImagen("../../img/personajes/".$postData['imagen_og']);
         }
         $nombreImagen = Imagen::subirImagen($fileData, "../../img/personajes/");
     }

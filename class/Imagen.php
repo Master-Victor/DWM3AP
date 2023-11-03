@@ -15,4 +15,20 @@
                 return $filename;
             }
         }
+
+        static public function borrarImagen($archivo): bool
+        {
+            if (file_exists(($archivo))) {
+    
+                $fileDelete =  unlink($archivo);
+    
+                if (!$fileDelete) {
+                    throw new Exception("No se pudo subir la imagen");
+                } else {
+                    return TRUE;
+                }
+            }else{
+                return FALSE;
+            }
+        }
     }

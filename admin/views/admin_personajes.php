@@ -1,9 +1,5 @@
 <?php
-
 $personajes = (new Personaje())->lista_completa();
-echo "<pre>";
-print_r($personajes);
-echo "</pre>";
 ?>
 <div class="row my-5">
     <div class="col">

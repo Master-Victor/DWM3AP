@@ -13,6 +13,18 @@ $seccionesValidas = [
     "admin_personajes" => [
         "titulo" => "Administración de Personajes"
     ],
+    "admin_series" => [
+        "titulo" => "Administración de Series"
+    ],    
+    "admin_artistas" => [
+        "titulo" => "Administración de Artistas"
+    ],
+    "admin_guionistas" => [
+        "titulo" => "Administración de Guionistas"
+    ],  
+    "admin_comics" => [
+        "titulo" => "Administración de Comics"
+    ],         
     "add_personaje" =>[
         "titulo" => "Agregar Personaje"
     ],
@@ -62,8 +74,21 @@ if (array_key_exists($seccion, $seccionesValidas)) {
                         <a class="nav-link active" href="index.php?sec=dashboard">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php?sec=admin_personajes">admin personajes</a>
+                        <a class="nav-link active" href="index.php?sec=admin_personajes">Personajes</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.php?sec=admin_comics">Comics</a>
+                    </li>                    
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.php?sec=admin_series">Series</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.php?sec=admin_guionistas">Guionistas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.php?sec=admin_artistas">Artistas</a>
+                    </li>                    
+
                 </ul>
             </div>
         </div>

@@ -1,10 +1,11 @@
 <?php
-class Artista{
+class Artista
+{
     protected $id;
     protected $nombre_completo;
     protected $biografia;
     protected $foto_perfil;
-    
+
 
     /**
      * Get the value of id
@@ -78,7 +79,7 @@ class Artista{
         return $this;
     }
 
-    public function get_x_id(int $id) : ?Artista
+    public function get_x_id(int $id): ?Artista
     {
         $conexion = (new Conexion())->getConexion();
         $query = "SELECT * FROM artistas WHERE id = $id";
@@ -90,5 +91,23 @@ class Artista{
         $resultado = $PDOStatement->fetch();
 
         return $resultado ? $resultado : null;
+    }
+
+    /**
+     * Devuelve todos los artistas en base
+     * @return Artista[]
+     */
+    public function lista_completa(): array
+    {
+        $conexion = (new Conexion())->getConexion();
+        $query = "SELECT * FROM artistas";
+
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->execute();
+
+        $result = $PDOStatement->fetchAll();
+
+        return $result;
     }
 }

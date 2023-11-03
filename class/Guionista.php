@@ -1,6 +1,7 @@
 <?PHP
 
-    class Guionista{
+class Guionista
+{
         protected $id;
         protected $nombre_completo;
         protected $biografia;
@@ -60,17 +61,38 @@
                 return $this;
         }
 
-        public function get_x_id(int $id) : ?Guionista
+        public function get_x_id(int $id): ?Guionista
         {
-            $conexion = (new Conexion())->getConexion();
-            $query = "SELECT * FROM guionistas WHERE id = $id";
-    
-            $PDOStatement = $conexion->prepare($query);
-            $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
-            $PDOStatement->execute();
+                $conexion = (new Conexion())->getConexion();
+                $query = "SELECT * FROM guionistas WHERE id = $id";
 
-            $resultado = $PDOStatement->fetch();
+                $PDOStatement = $conexion->prepare($query);
+                $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+                $PDOStatement->execute();
 
-            return $resultado ? $resultado : null;
+                $resultado = $PDOStatement->fetch();
+
+                return $resultado ? $resultado : null;
         }
-    }
+        /**
+         * Devuelve todos los guoinistas en base
+         * @return Guionista[]
+         */
+        public function lista_completa(): array
+        {
+                $conexion = (new Conexion())->getConexion();
+                $query = "SELECT * FROM guionistas";
+
+                $PDOStatement = $conexion->prepare($query);
+                $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+                $PDOStatement->execute();
+
+                $result = $PDOStatement->fetchAll();
+
+                return $result;
+        }
+
+        public function getId(){
+                return $this->id;
+        }
+}
