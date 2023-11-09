@@ -7,6 +7,10 @@ $personajes = (new Personaje())->lista_completa();
 $guionistas = (new Guionista())->lista_completa();
 $artistas = (new Artista())->lista_completa();
 
+echo "<pre>";
+print_r($comic);
+echo "</pre>";
+
 ?>
 
 <div class="row my-5">
@@ -16,7 +20,7 @@ $artistas = (new Artista())->lista_completa();
         <div class="row mb-5 d-flex align-items-center">
             <div class="row mb-5 d-flex align-items-center">
 
-                <form class="row g-3" action="actions/add_comic_acc.php" method="POST" enctype="multipart/form-data">
+                <form class="row g-3" action="actions/edit_comic_acc.php?id=<?= $comic->getId() ?>" method="POST" enctype="multipart/form-data">
 
                     <div class="col-md-6 mb-3">
                         <label for="titulo" class="form-label">Titulo</label>
@@ -54,10 +58,16 @@ $artistas = (new Artista())->lista_completa();
                         <input type="number" class="form-control" id="numero" name="numero" required value="<?= $comic->getNumero() ?>">
                     </div>
 
-                    <div class="col-md-6 mb-3">
-                        <label for="portada" class="form-label">Portada</label>
-                        <input class="form-control" type="file" id="portada" name="imagen" required multiple>
-                    </div>
+				<div class="col-md-4 mb-3">
+					<label for="portada_og" class="form-label">Portada Actual</label>
+					<img src="../img/covers/<?= $comic->getPortada() ?>" alt="Imágen Illustrativa de <?= $comic->getTitulo() ?>" class="img-fluid rounded shadow-sm d-block">
+					<input class="form-control" type="hidden" id="portada_og" name="portada_og" required value="<?= $comic->getPortada() ?>">
+				</div>
+
+                <div class="col-md-4 mb-3">
+					<label for="imagen" class="form-label">Reemplazar Portada</label>
+					<input class="form-control" type="file" id="imagen" name="imagen">
+				</div>
 
                     <div class="col-md-6 mb-3">
                         <label for="publicacion" class="form-label">Publicacion</label>
@@ -107,12 +117,29 @@ $artistas = (new Artista())->lista_completa();
                     </div>
 
                     <div class="col-md-12 mb-3">
+
+                    <label class="form-label d-block">Personajes Secundarios</label>   
+                        <?php foreach( $personajes as $p ){ 
+                            $ps_selected = explode(",", $comic->getPersonajeSecundario())    
+                        ?>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" <?= in_array($p->getId(), $ps_selected) ? "checked" : "" 
+                                ?>
+                                value="<?=$p->getId()?>"
+                                name="personajes_secundarios[]"
+                                />
+                                <label class="form-check-label mb-2"  > <?= $p->getNombre() ?> </label>
+                            </div>                            
+                        <?php } ?>    
+                    </div>
+
+                    <div class="col-md-12 mb-3">
                         <label for="bajada" class="form-label">Bajada</label>
                         <textarea class="form-control" id="bajada" name="bajada" rows="7"><?= $comic->getBajada() ?></textarea>
                     </div>
 
 
-                    <button type="submit" class="btn btn-primary">Cargar</button>
+                    <button type="submit" class="btn btn-primary">Editar</button>
                 </form>
             </div>
         </div>
