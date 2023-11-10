@@ -35,8 +35,11 @@ $comics = (new comic())->catalogo_completo();
                             <td><?= $C->getArte() ?></td>
                             <td>$<?= $C->getPrecio() ?></td>
                             <td>
-                                <a href="index.php?sec=edit_comic&id=<?= $C->getId() ?>" role="button" class="d-block btn btn-sm btn-warning mb-1">Editar</a>
-                                <a href="index.php?sec=delete_comic&id=<?= $C->getId() ?>" role="button" class="d-block btn btn-sm btn-danger">Eliminar</a>
+                                <a href="index.php?sec=edit_comic&id=<?= $C->getId()?>" role="button" class="d-block btn btn-sm btn-warning mb-1">Editar</a>
+                                <form action="actions/delete_comic_acc.php?id=" method="get">
+                                    <input type="hidden" name="id" value="<?= $C->getId() ?>">
+                                    <button type="submit" class="d-block btn btn-sm btn-danger">Eliminar</button>
+                                </form>
                             </td>
                         </tr>
                     <?PHP } ?>

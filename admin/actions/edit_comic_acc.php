@@ -1,22 +1,21 @@
 <?php
 require_once "../../libraries/autoload.php";
-echo "<pre>";
-print_r($_POST['personajes_secundarios']);
-echo "</pre>";
 $fileData = $_FILES ?? FALSE;
 $id = $_GET['id'] ?? FALSE;
 $imagen = "";
-$personajes_secundarios = $_POST['personajes_secundarios'];
+$personajes_secundarios = $_POST['personajes_secundarios'] ?? false;
 try {
     $comic = new Comic();
         if(!empty($fileData['portada_og'])){
             Imagen::borrarImagen(__DIR__ . "/../../img/covers/" . $fileData['portada_og']);
         }
-        $comic->clear_personajes_sec($id);
-      foreach( $personajes_secundarios as $personaje_id ){
-        echo "intente agregar";
-        $comic->add_personajes_sec($id, $personaje_id);
-      }
+        if(!empty($_POST['personajes_secundarios'])){
+            $comic->clear_personajes_sec($id);
+            foreach( $personajes_secundarios as $personaje_id ){
+                echo "intente agregar";
+                $comic->add_personajes_sec($id, $personaje_id);
+              }
+        }
     $comic->edit(
         $_POST['titulo'],
         $_POST['personaje_principal_id'],
@@ -33,13 +32,15 @@ try {
         $_POST['precio'],
         $id
     );
-    if(!empty($_FILES["imagen"])){
+    echo "<pre>";
+    print_r($_FILES);
+    echo "</pre>";
+    if( $_FILES["imagen"]["size"] > 0){
         $imagen = Imagen::subirImagen($_FILES, __DIR__ . "/../../img/covers"); 
     }
+    header('Location: ../index.php?sec=admin_comics');
 } catch ( Exception $e) {
     echo "<pre>";
     print_r($e->getMessage());
     echo "<pre>";
 }
-
-?>

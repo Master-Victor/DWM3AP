@@ -22,21 +22,21 @@ $artistas = (new Artista())->lista_completa();
                     <label for="serie_id" class="form-label">Serie</label>
                     <select class="form-select" name="serie_id" id="serie_id" required>
                         <option value="" selected disabled>Elija una opción</option>
-                        <?php foreach($series as $S){?>
-                            <option value="<?= $S->getId() ?>"><?=$S->getNombre()?></option>
+                        <?php foreach ($series as $S) { ?>
+                            <option value="<?= $S->getId() ?>"><?= $S->getNombre() ?></option>
                         <?php } ?>
                     </select>
                 </div>
 
-				<div class="col-md-4 mb-3">
-					<label for="personaje_principal_id" class="form-label">Personaje Principal</label>
-					<select class="form-select" name="personaje_principal_id" id="personaje_principal_id" required>
-						<option value="" selected disabled>Elija una opción</option>
-						<?PHP foreach ($personajes as $P) { ?>
-							<option value="<?= $P->getId() ?>"><?= $P->getNombre() ?></option>
-						<?PHP } ?>
-					</select>
-				</div>
+                <div class="col-md-4 mb-3">
+                    <label for="personaje_principal_id" class="form-label">Personaje Principal</label>
+                    <select class="form-select" name="personaje_principal_id" id="personaje_principal_id" required>
+                        <option value="" selected disabled>Elija una opción</option>
+                        <?PHP foreach ($personajes as $P) { ?>
+                            <option value="<?= $P->getId() ?>"><?= $P->getNombre() ?></option>
+                        <?PHP } ?>
+                    </select>
+                </div>
 
                 <div class="col-md-4 mb-3">
                     <label for="volumen" class="form-label">Volumen</label>
@@ -59,25 +59,25 @@ $artistas = (new Artista())->lista_completa();
                 </div>
 
 
-				<div class="col-md-6 mb-3">
-					<label for="guionista_id" class="form-label">Guionista</label>
-					<select class="form-select" name="guionista_id" id="guionista_id" required>
-						<option value="" selected disabled>Elija una opción</option>
-						<?PHP foreach ($guionistas as $G) { ?>
-							<option value="<?= $G->getId() ?>"><?= $G->getNombreCompleto() ?></option>
-						<?PHP } ?>
-					</select>
-				</div>
+                <div class="col-md-6 mb-3">
+                    <label for="guionista_id" class="form-label">Guionista</label>
+                    <select class="form-select" name="guionista_id" id="guionista_id" required>
+                        <option value="" selected disabled>Elija una opción</option>
+                        <?PHP foreach ($guionistas as $G) { ?>
+                            <option value="<?= $G->getId() ?>"><?= $G->getNombreCompleto() ?></option>
+                        <?PHP } ?>
+                    </select>
+                </div>
 
-				<div class="col-md-6 mb-3">
-					<label for="artista_id" class="form-label">Artista</label>
-					<select class="form-select" name="artista_id" id="artista_id" required>
-						<option value="" selected disabled>Elija una opción</option>
-						<?PHP foreach ($artistas as $A) { ?>
-							<option value="<?= $A->getId() ?>"><?= $A->getNombreCompleto() ?></option>
-						<?PHP } ?>
-					</select>
-				</div>
+                <div class="col-md-6 mb-3">
+                    <label for="artista_id" class="form-label">Artista</label>
+                    <select class="form-select" name="artista_id" id="artista_id" required>
+                        <option value="" selected disabled>Elija una opción</option>
+                        <?PHP foreach ($artistas as $A) { ?>
+                            <option value="<?= $A->getId() ?>"><?= $A->getNombreCompleto() ?></option>
+                        <?PHP } ?>
+                    </select>
+                </div>
 
                 <div class="col-md-4 mb-3">
                     <label for="origen" class="form-label">Origen</label>
@@ -98,6 +98,18 @@ $artistas = (new Artista())->lista_completa();
                 <div class="col-md-4 mb-3">
                     <label for="precio" class="form-label">Precio</label>
                     <input type="number" class="form-control" id="precio" name="precio" required>
+                </div>
+
+                <div class="col-md-12 mb-3">
+
+                    <label class="form-label d-block">Personajes Secundarios</label>
+                    <?php foreach ($personajes as $p) {
+                    ?>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="<?= $p->getId() ?>" name="personajes_secundarios[]" />
+                            <label class="form-check-label mb-2"> <?= $p->getNombre() ?> </label>
+                        </div>
+                    <?php } ?>
                 </div>
 
                 <div class="col-md-12 mb-3">

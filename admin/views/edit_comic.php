@@ -7,10 +7,6 @@ $personajes = (new Personaje())->lista_completa();
 $guionistas = (new Guionista())->lista_completa();
 $artistas = (new Artista())->lista_completa();
 
-echo "<pre>";
-print_r($comic);
-echo "</pre>";
-
 ?>
 
 <div class="row my-5">

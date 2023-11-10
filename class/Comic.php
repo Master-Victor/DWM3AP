@@ -303,7 +303,7 @@ class Comic
         $PDOStatement = $conexion->prepare($query);
         $PDOStatement->execute();
 
-        return "Aca iria el id del comic que recien cree";
+        return $conexion->lastInsertId();
     }
 
     public function edit($titulo, $personaje_principal_id, $serie_id, $guionista_id, $artista_id, $volumen, $numero, $publicacion, $origen, $editorial, $bajada, $portada, $precio, $id_comic){
@@ -334,6 +334,13 @@ class Comic
     {
         $conexion = (new Conexion())->getConexion();
         $query = "DELETE FROM comic_x_personaje WHERE id_comic = $comic_id";   
+        $PDOStatement = $conexion->prepare($query);  
+        $PDOStatement->execute();
+    }
+
+    public function delete(){
+        $conexion = (new Conexion())->getConexion();
+        $query = "DELETE FROM comics WHERE id = $this->id";  
         $PDOStatement = $conexion->prepare($query);  
         $PDOStatement->execute();
     }

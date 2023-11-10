@@ -39,6 +39,9 @@ $seccionesValidas = [
     ],    
     "delete_personaje" => [
         "titulo" => "Eliminar Personaje"
+    ],
+    "login" => [
+        "titulo" => "LOGIN"
     ]
 ];
 
