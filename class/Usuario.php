@@ -7,7 +7,7 @@ class Usuario
     protected $nombre_usuario;
     protected $nombre_completo;
     protected $password;
-    protected $rol;
+    protected $roles;
     /**
      * Get the value of password
      */ 
@@ -37,7 +37,7 @@ class Usuario
      */ 
     public function getRol()
     {
-        return $this->rol;
+        return $this->roles;
     }
 
     /**
@@ -69,6 +69,53 @@ class Usuario
             return null;
         }
         return $result;
+    }
+
+    /**
+     * Set the value of email
+     */
+    public function setEmail($email): self {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * Set the value of nombre_usuario
+     */
+    public function setNombreUsuario($nombre_usuario): self {
+        $this->nombre_usuario = $nombre_usuario;
+        return $this;
+    }
+
+    /**
+     * Set the value of nombre_completo
+     */
+    public function setNombreCompleto($nombre_completo): self {
+        $this->nombre_completo = $nombre_completo;
+        return $this;
+    }
+
+    /**
+     * Set the value of password
+     */
+    public function setPassword($password): self {
+        $this->password = $password;
+        return $this;
+    }
+
+    /**
+     * Set the value of rol
+     */
+    public function setRoles($roles): self {
+        $this->roles = $roles;
+        return $this;
+    }
+
+    public function guardar(){
+        $conexion = (new Conexion())->getConexion();
+        $query = "INSERT INTO `usuarios` (`id`, `email`, `nombre_usuario`, `nombre_completo`, `password`, `roles`) VALUES (NULL, '$this->email', '$this->nombre_usuario', '$this->nombre_completo', '$this->password', 'usuario')";
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute();
     }
 }
 

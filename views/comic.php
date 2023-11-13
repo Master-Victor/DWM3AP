@@ -8,6 +8,7 @@
     if($id){
         $comic = (new Comic())->catalogo_x_id(intVal($id)); 
     }
+
 ?>
 
 <div class="row">

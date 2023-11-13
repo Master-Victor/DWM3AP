@@ -4,7 +4,6 @@ require_once "libraries/funciones.php";
 //require_once "libraries/productos.php";
 
 $comics = (new Comic())->catalogo_completo();
-
 ?>
 
 <?php if (count($comics) > 0) { ?>

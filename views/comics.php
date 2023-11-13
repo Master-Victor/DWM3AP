@@ -10,7 +10,6 @@
         $comics = (new Comic())->catalogo_x_personaje(intval($serieSeleccionada));
     }
 
-
 ?>
 
 <?php if( count($comics) > 0 ){ ?>

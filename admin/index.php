@@ -8,44 +8,63 @@ $vistas = "404";
 
 $seccionesValidas = [
     "dashboard" => [
-        "titulo" => "Bienvenidos"
+        "titulo" => "Bienvenidos",
+        "restringido" => true
     ],
     "admin_personajes" => [
-        "titulo" => "Administración de Personajes"
+        "titulo" => "Administración de Personajes",
+        "restringido" => true
     ],
     "admin_series" => [
-        "titulo" => "Administración de Series"
+        "titulo" => "Administración de Series",
+        "restringido" => true
     ],    
     "admin_artistas" => [
-        "titulo" => "Administración de Artistas"
+        "titulo" => "Administración de Artistas",
+        "restringido" => true
     ],
     "admin_guionistas" => [
-        "titulo" => "Administración de Guionistas"
+        "titulo" => "Administración de Guionistas",
+        "restringido" => true
     ],  
     "admin_comics" => [
-        "titulo" => "Administración de Comics"
+        "titulo" => "Administración de Comics",
+        "restringido" => true
     ],         
     "add_personaje" =>[
-        "titulo" => "Agregar Personaje"
+        "titulo" => "Agregar Personaje",
+        "restringido" => true
     ],
     "add_comic" =>[
-        "titulo" => "Agregar Comic"
+        "titulo" => "Agregar Comic",
+        "restringido" => true
     ],    
     "edit_personaje" =>[
-        "titulo" => "Editar Personaje"
+        "titulo" => "Editar Personaje",
+        "restringido" => true
     ],
     "edit_comic" =>[
-        "titulo" => "Editar comic"
+        "titulo" => "Editar comic",
+        "restringido" => true
     ],    
     "delete_personaje" => [
-        "titulo" => "Eliminar Personaje"
+        "titulo" => "Eliminar Personaje",
+        "restringido" => true
     ],
     "login" => [
-        "titulo" => "LOGIN"
-    ]
+        "titulo" => "LOGIN",
+        "restringido" => false
+    ],
+    "register" => [
+        "titulo" => "REGISTRAR",
+        "restringido" => false
+    ],
 ];
 
 if (array_key_exists($seccion, $seccionesValidas)) {
+    if( $seccionesValidas[$seccion]["restringido"] == true ){
+        (new Autentiticacion())->verify();
+    }
     $vistas = $seccion;
     $titulo = $seccionesValidas[$seccion]["titulo"];
 } else {
@@ -79,25 +98,30 @@ if (array_key_exists($seccion, $seccionesValidas)) {
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
+                    <li class="nav-item <?= isset($_SESSION["loggedIn"]) ? "" : "d-none"  ?>">
                         <a class="nav-link active" href="index.php?sec=dashboard">Dashboard</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item <?= isset($_SESSION["loggedIn"]) ? "" : "d-none"  ?>">
                         <a class="nav-link active" href="index.php?sec=admin_personajes">Personajes</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item <?= isset($_SESSION["loggedIn"]) ? "" : "d-none"  ?>">
                         <a class="nav-link active" href="index.php?sec=admin_comics">Comics</a>
                     </li>                    
-                    <li class="nav-item">
+                    <li class="nav-item <?= isset($_SESSION["loggedIn"]) ? "" : "d-none"  ?>">
                         <a class="nav-link active" href="index.php?sec=admin_series">Series</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item <?= isset($_SESSION["loggedIn"]) ? "" : "d-none"  ?>">
                         <a class="nav-link active" href="index.php?sec=admin_guionistas">Guionistas</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item <?= isset($_SESSION["loggedIn"]) ? "" : "d-none"  ?>">
                         <a class="nav-link active" href="index.php?sec=admin_artistas">Artistas</a>
-                    </li>                    
-
+                    </li> 
+                    <li>
+                        <a class="nav-link active <?= isset($_SESSION["loggedIn"]) ? "d-none" : ""  ?>" href="index.php?sec=login">Login</a>
+                    </li>                   
+                    <li>
+                        <a class="nav-link active <?= isset($_SESSION["loggedIn"]) ? "" : "d-none"  ?>" href="actions/auth_logout.php">Salir</a>
+                    </li> 
                 </ul>
             </div>
         </div>

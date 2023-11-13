@@ -116,7 +116,7 @@ $artistas = (new Artista())->lista_completa();
 
                     <label class="form-label d-block">Personajes Secundarios</label>   
                         <?php foreach( $personajes as $p ){ 
-                            $ps_selected = explode(",", $comic->getPersonajeSecundario())    
+                            $ps_selected = $comic->getPersonajeSecundarioIds();    
                         ?>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="checkbox" <?= in_array($p->getId(), $ps_selected) ? "checked" : "" 
