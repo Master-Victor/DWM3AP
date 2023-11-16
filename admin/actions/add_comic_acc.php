@@ -27,6 +27,7 @@ try{
             $comic->add_personajes_sec($id_comic, $personaje_id);
           }
     }
+    (new Alerta())->add_alerta("Se pudo agregar Comic", "success");
     header('Location: ../index.php?sec=admin_comics');
 }catch( Exception $e ){
     echo "<pre>";

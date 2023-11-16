@@ -1,20 +1,20 @@
 <?php
-    //require_once "includes/productos.php";
-    require_once "libraries/funciones.php";
-    require_once "libraries/productos.php";
+//require_once "includes/productos.php";
+require_once "libraries/funciones.php";
+require_once "libraries/productos.php";
 
-    $id = isset($_GET["id"]) ?  $_GET["id"] : false;
-    
-    if($id){
-        $comic = (new Comic())->catalogo_x_id(intVal($id)); 
-    }
+$id = isset($_GET["id"]) ?  $_GET["id"] : false;
+
+if ($id) {
+    $comic = (new Comic())->catalogo_x_id(intVal($id));
+}
 
 ?>
 
 <div class="row">
-<?PHP if (isset($comic)) { ?>
-    <h1 class="text-center my-5"> <?= $comic->nombre_completo()?></h1>
-    <div class="col">
+    <?PHP if (isset($comic)) { ?>
+        <h1 class="text-center my-5"> <?= $comic->nombre_completo() ?></h1>
+        <div class="col">
             <div class="card mb-5">
                 <div class="row g-0">
                     <div class="col-md-5">
@@ -35,23 +35,30 @@
 
                         <div class="card-body flex-grow-0 mt-auto">
                             <div class="fs-3 mb-3 fw-bold text-center text-danger">$<?= $comic->precio_formateado() ?></div>
-                            <a href="#" class="btn btn-danger w-100 fw-bold">COMPRAR</a>
+                            <form action="admin/actions/add_item_acc.php" method="get">
+                                <div class="col-6 d-flex align-items-center">
+                                    <label for="q" class="fw-bold me-2">Cantidad: </label>
+                                    <input type="number" class="form-control" value="1" name="q" id="q">
+                                </div>
+                                <input type="hidden" value="<?= $comic->getId() ?>" name="id" id="id">
+                                <input class="btn btn-danger w-100 fw-bold my-5" type="submit" value="Agregar item" />
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
 
 
-         </div>
+        </div>
 
 
 
 
-<?PHP }else{ ?>
-    <div class="col">
-    <h2 class="text-center m-5">No se encontró el producto deseado.</h2>
-</div>
-<?PHP } ?>
+    <?PHP } else { ?>
+        <div class="col">
+            <h2 class="text-center m-5">No se encontró el producto deseado.</h2>
+        </div>
+    <?PHP } ?>
 
 
 

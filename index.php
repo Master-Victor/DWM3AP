@@ -26,7 +26,13 @@ $seccionesValidas = [
     ],
     "catalogo_completo" => [
         "titulo" => "Todos los Comics"
-    ]    
+    ],
+    "login" => [
+        "titulo" => "Login"
+    ],
+    "carrito" => [
+        "titulo" => "Carrito"
+    ]
 ];
 
 if( array_key_exists($seccion, $seccionesValidas) ){

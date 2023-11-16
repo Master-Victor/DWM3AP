@@ -38,6 +38,7 @@ try {
     if( $_FILES["imagen"]["size"] > 0){
         $imagen = Imagen::subirImagen($_FILES, __DIR__ . "/../../img/covers"); 
     }
+    (new Alerta())->add_alerta("Se pudo modificar Comic", "success");
     header('Location: ../index.php?sec=admin_comics');
 } catch ( Exception $e) {
     echo "<pre>";

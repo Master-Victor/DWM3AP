@@ -4,6 +4,7 @@ $personajes = (new Personaje())->lista_completa();
 <div class="row my-5">
     <div class="col">
         <h1 class="text-center mb-5 fw-bold">Administración de Personajes</h1>
+        <div><?= (new Alerta())->mostrar() ?></div>
         <div class="row mb-5 d-flex align-items-center">
             <table class="table">
                 <thead>

@@ -13,7 +13,11 @@ class Alerta{
             $alerta = $_SESSION['alerta'];
             unset($_SESSION['alerta']);
             //return "<div class='alert alert-{$alerta['tipo']}'>{$alerta['mensaje']}</div>";
-            return $_SESSION['alerta']["mensaje"];
+            $html = "<div class='alert alert-".$alerta['tipo']." alert-dismissible fade show' role='alert'>";
+            $html .= "<strong>".$alerta['mensaje']."</strong> ";
+            $html .= "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>";
+            $html .= "</div>";
+            return $html;
         }
     }
 

@@ -27,6 +27,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?sec=envios">Envios</a>
                 </li>
+                <li>
+                    <a class="nav-link active <?= isset($_SESSION["loggedIn"]) ? "d-none" : ""  ?>" href="index.php?sec=login">Login</a>
+                </li>
+                <li>
+                    <a class="nav-link active <?= isset($_SESSION["loggedIn"]) ? "" : "d-none"  ?>" href="admin/actions/auth_logout.php">Salir</a>
+                </li>
             </ul>
         </div>
     </div>
