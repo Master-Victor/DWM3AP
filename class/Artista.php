@@ -81,7 +81,7 @@ class Artista
 
     public function get_x_id(int $id): ?Artista
     {
-        $conexion = (new Conexion())->getConexion();
+        $conexion = Conexion::getConexion();
         $query = "SELECT * FROM artistas WHERE id = $id";
 
         $PDOStatement = $conexion->prepare($query);
@@ -99,7 +99,7 @@ class Artista
      */
     public function lista_completa(): array
     {
-        $conexion = (new Conexion())->getConexion();
+        $conexion = Conexion::getConexion();
         $query = "SELECT * FROM artistas";
 
         $PDOStatement = $conexion->prepare($query);

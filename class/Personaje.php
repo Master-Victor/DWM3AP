@@ -19,7 +19,7 @@ class Personaje
 
         $resultado = [];
 
-        $conexion = (new Conexion())->getConexion();
+        $conexion = Conexion::getConexion();
         $query = "SELECT * FROM personajes";
 
         $PDOStatement = $conexion->prepare($query);
@@ -42,7 +42,7 @@ class Personaje
      */
     public function insert($nombre, $alias, $creador, $primera_aparicion, $biografia, $imagen)
     {
-        $conexion = (new Conexion())->getConexion();
+        $conexion = Conexion::getConexion();
         $query = "INSERT INTO `personajes` (`id`, `nombre`, `alias`, `biografia`, `creador`, `primera_aparicion`, `imagen`) VALUES (NULL, :nombre, :alias, :biografia,:creador, :primera_aparicion, :imagen);";
         $PDOStatement = $conexion->prepare($query);
         $PDOStatement->execute([
@@ -61,7 +61,7 @@ class Personaje
      */
     public function get_x_id(int $id): ?Personaje
     {
-        $conexion = (new Conexion())->getConexion();
+        $conexion = Conexion::getConexion();
         $query = "SELECT * FROM personajes WHERE id = :id";
 
         $PDOStatement = $conexion->prepare($query);
@@ -91,7 +91,7 @@ class Personaje
      */ 
     public function edit($nombre, $alias, $creador, $primera_aparicion, $biografia, $imagen, $id)
     {
-        $conexion = (new Conexion())->getConexion();
+        $conexion = Conexion::getConexion();
         $query = "UPDATE `personajes` SET `nombre` = '$nombre', `alias` = '$alias', `biografia` = '$biografia', `creador` = '$creador', `primera_aparicion` = '$primera_aparicion', `imagen` = '$imagen' WHERE `personajes`.`id` = $id";
         $PDOStatement = $conexion->prepare($query);
         $PDOStatement->execute();
@@ -99,7 +99,7 @@ class Personaje
 
     public function delete($id)
     {
-        $conexion = (new Conexion())->getConexion();
+        $conexion = Conexion::getConexion();
         $query = "DELETE FROM `personajes` WHERE `personajes`.`id` = :id";
         $PDOStatement = $conexion->prepare($query);
         $PDOStatement->execute([

@@ -18,21 +18,20 @@ $carrito = (new Carrito())->get_carrito();
     <tbody>
         <?php foreach ($carrito as $key => $value) { ?>
             <form action="admin/actions/modificar_item_acc.php" method="get">
-            <tr>
-                <td> <img class="img-fluid" src="img/covers/<?= $value["portada"] ?>" alt=""> </td>
-                <td class="align-middle"> <?= $value["producto"] ?> </td>
-                <td class="align-middle"> <?= $value["precio"] ?> </td>
-                <td class="align-middle">
-                    <label for="q_<?= $key ?>" class="visually-hidden">Cantidad</label>
-                    <input type="number" class="form-control" value="<?= $value['cantidad'] ?>" id="q_<?= $key ?>" name="q[<?= $key ?>]">
-                    <input type="hidden" value="<?= $key?>" name="id"/>
-                </td>
-                <td class="align-middle"><?= $value["precio"] * $value["cantidad"] ?></td>
-                <td class="align-middle">
-                    <a href="admin/actions/remove_item_acc.php?id=<?= $key ?>" class="btn btn-sm btn-danger">Eliminar</a>
-                    <input type="submit" class="btn btn-sm btn-warning" value="Modificar"/>
-                </td>
-                </form>
+                <tr>
+                    <td> <img class="img-fluid" src="img/covers/<?= $value["portada"] ?>" alt=""> </td>
+                    <td class="align-middle"> <?= $value["producto"] ?> </td>
+                    <td class="align-middle"> <?= $value["precio"] ?> </td>
+                    <td class="align-middle">
+                        <label for="cantidad_<?= $key ?>" class="visually-hidden">Cantidad</label>
+                        <input type="number" class="form-control" value="<?= $value['cantidad'] ?>" id="cantidad_<?= $key ?>" name="cantidad[<?= $key ?>]">
+                    </td>
+                    <td class="align-middle"><?= $value["precio"] * $value["cantidad"] ?></td>
+                    <td class="align-middle">
+                        <a href="admin/actions/remove_item_acc.php?id=<?= $key ?>" class="btn btn-sm btn-danger">Eliminar</a>
+                        <input type="submit" class="btn btn-sm btn-warning" value="Modificar" />
+                    </td>
+            </form>
             </tr>
         <?php  } ?>
     </tbody>

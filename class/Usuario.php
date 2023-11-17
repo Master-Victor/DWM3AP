@@ -57,7 +57,7 @@ class Usuario
     }
 
     public function usuario_x_username($username){
-        $conexion = (new Conexion())->getConexion();
+        $conexion = Conexion::getConexion();
         $query = "SELECT * FROM usuarios WHERE nombre_usuario = '$username'";
         $PDOStatement = $conexion->prepare($query);
         $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
@@ -112,7 +112,7 @@ class Usuario
     }
 
     public function guardar(){
-        $conexion = (new Conexion())->getConexion();
+        $conexion = Conexion::getConexion();
         $query = "INSERT INTO `usuarios` (`id`, `email`, `nombre_usuario`, `nombre_completo`, `password`, `roles`) VALUES (NULL, '$this->email', '$this->nombre_usuario', '$this->nombre_completo', '$this->password', 'usuario')";
         $PDOStatement = $conexion->prepare($query);
         $PDOStatement->execute();

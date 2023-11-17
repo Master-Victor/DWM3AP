@@ -63,7 +63,7 @@ class Guionista
 
         public function get_x_id(int $id): ?Guionista
         {
-                $conexion = (new Conexion())->getConexion();
+                $conexion = Conexion::getConexion();
                 $query = "SELECT * FROM guionistas WHERE id = $id";
 
                 $PDOStatement = $conexion->prepare($query);
@@ -80,7 +80,7 @@ class Guionista
          */
         public function lista_completa(): array
         {
-                $conexion = (new Conexion())->getConexion();
+                $conexion = Conexion::getConexion();
                 $query = "SELECT * FROM guionistas";
 
                 $PDOStatement = $conexion->prepare($query);

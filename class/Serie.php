@@ -14,7 +14,7 @@ class Serie
      */
     public function lista_completa(): array
     {
-        $conexion = (new Conexion())->getConexion();
+        $conexion = Conexion::getConexion();
         $query = "SELECT * FROM serie";
 
         $PDOStatement = $conexion->prepare($query);
@@ -33,7 +33,7 @@ class Serie
      */
     public function get_x_id(int $id): ?Serie
     {
-        $conexion = (new Conexion())->getConexion();
+        $conexion = Conexion::getConexion();
         $query = "SELECT * FROM serie WHERE id = $id";
 
         $PDOStatement = $conexion->prepare($query);

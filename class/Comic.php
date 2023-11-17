@@ -163,7 +163,7 @@ class Comic
     public function catalogo_completo(): array
     {
         $catalogo = [];
-        $conexion = (new Conexion())->getConexion();
+        $conexion = Conexion::getConexion();
         $query = "SELECT comics.*,GROUP_CONCAT(comic_x_personaje.id_personaje) AS personajes_secundarios FROM comics LEFT JOIN comic_x_personaje ON comic_x_personaje.id_comic = comics.id GROUP BY comics.id";
 
         $PDOStatement = $conexion->prepare($query);
@@ -179,7 +179,7 @@ class Comic
 
     public function catalogo_x_personaje(int $id_personaje){
         $catalogo = [];
-        $conexion = (new Conexion())->getConexion();
+        $conexion = Conexion::getConexion();
         $query = "SELECT comics.*,GROUP_CONCAT(comic_x_personaje.id_personaje) AS personajes_secundarios FROM comics LEFT JOIN comic_x_personaje ON comic_x_personaje.id_comic = comics.id WHERE comics.personaje_principal_id = $id_personaje GROUP BY comics.id";
 
         $PDOStatement = $conexion->prepare($query);
@@ -258,7 +258,7 @@ class Comic
 
     public function catalogo_x_artista(int $artista_id){
         $catalogo = [];
-        $conexion = (new Conexion())->getConexion();
+        $conexion = Conexion::getConexion();
         $query = "SELECT * FROM comics WHERE comics.artista_id = $artista_id";
 
         $PDOStatement = $conexion->prepare($query);
@@ -272,7 +272,7 @@ class Comic
 
     public function catalogo_x_guionista(int $guionista_id){
         $catalogo = [];
-        $conexion = (new Conexion())->getConexion();
+        $conexion = Conexion::getConexion();
         $query = "SELECT * FROM comics WHERE comics.guionista_id = $guionista_id";
 
         $PDOStatement = $conexion->prepare($query);
@@ -286,7 +286,7 @@ class Comic
 
     public function catalogo_x_rango(int $min, int $max){ 
         $catalogo = [];
-        $conexion = (new Conexion())->getConexion();
+        $conexion = Conexion::getConexion();
         $query = "SELECT * FROM comics WHERE comics.precio > $min AND comics.precio < $max";
 
         $PDOStatement = $conexion->prepare($query);
@@ -310,7 +310,7 @@ class Comic
     }
 
     public function edit($titulo, $personaje_principal_id, $serie_id, $guionista_id, $artista_id, $volumen, $numero, $publicacion, $origen, $editorial, $bajada, $portada, $precio, $id_comic){
-        $conexion = (new Conexion())->getConexion();
+        $conexion = Conexion::getConexion();
         $query = "UPDATE `comics` SET `titulo` = '$titulo', `personaje_principal_id` = '$personaje_principal_id', `artista_id` = '$artista_id', `volumen` = '$volumen', `numero` = '$numero', `publicacion` = '$publicacion', `origen` = '$origen', `editorial` = '$editorial', `bajada` = '$bajada', `portada` = '$portada', `precio` = '$precio' WHERE `comics`.`id` = $id_comic";
 
         $PDOStatement = $conexion->prepare($query);
@@ -324,7 +324,7 @@ class Comic
      */
     public function add_personajes_sec($comic_id, $personaje_id)
     {
-        $conexion = (new Conexion())->getConexion();
+        $conexion = Conexion::getConexion();
         $query = "INSERT INTO comic_x_personaje VALUES (NULL, $comic_id, $personaje_id)";
         $PDOStatement = $conexion->prepare($query);
         $PDOStatement->execute();
@@ -335,14 +335,14 @@ class Comic
      */
     public function clear_personajes_sec($comic_id)
     {
-        $conexion = (new Conexion())->getConexion();
+        $conexion = Conexion::getConexion();
         $query = "DELETE FROM comic_x_personaje WHERE id_comic = $comic_id";   
         $PDOStatement = $conexion->prepare($query);  
         $PDOStatement->execute();
     }
 
     public function delete(){
-        $conexion = (new Conexion())->getConexion();
+        $conexion = Conexion::getConexion();
         $query = "DELETE FROM comics WHERE id = $this->id";  
         $PDOStatement = $conexion->prepare($query);  
         $PDOStatement->execute();

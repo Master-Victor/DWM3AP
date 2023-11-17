@@ -25,4 +25,15 @@
                 unset($_SESSION["carrito"][$id]);
             }
         }
+
+        public function modificar_cantidad(array $cantidades){
+            echo "<pre>";
+            print_r($_SESSION);
+            echo "</pre>";
+            foreach( $cantidades as $key => $cantidad ){
+                if( $_SESSION["carrito"][$key] ){
+                    $_SESSION["carrito"][$key]["cantidad"] = $cantidad;
+                }
+            }
+        }
     }
